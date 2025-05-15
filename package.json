@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "src/server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/server.ts",
+    "format": "prettier --write src/*/**",
+    "build": "tsc && cp ./package.json ./dist",
+    "start": "node dist/server.js"
   },
   "repository": {
     "type": "git",
