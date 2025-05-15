@@ -3,7 +3,6 @@ import { registerSchema, loginSchema } from "@/zodSchemas/auth.schema";
 import catchErrors from "@/utils/catchErrors";
 import appAssert from "@/utils/appAssert";
 
-import { hashValue, compareValue } from "@/utils/bcrypt";
 import { refreshTokenSignOptions, signToken, accessTokenSignOptions, verifyToken } from "@/utils/jwt";
 import { clearAuthCookies, setAuthCookies } from "@/utils/cookies";
 
@@ -12,23 +11,20 @@ import UserModel from "@/models/user.model";
 
 export const registerHandler = catchErrors(async (req, res) => {
   // validate inputs
-  const request = registerSchema.parse({ ...req.body });
+  const request = registerSchema.parse(req.body);
 
   // check whether user already exist or not?
   const checkUserExist = await UserModel.exists({
     email: request.email,
   });
 
-  appAssert(checkUserExist, StatusCodes.BAD_REQUEST, "User with this email already exists");
-
-  // hash password
-  const hashedPassword = await hashValue(request.password);
+  appAssert(!checkUserExist, StatusCodes.BAD_REQUEST, "User with this email already exists");
 
   // create new user
   const registerUser = await UserModel.create({
     fullName: request.fullName,
     email: request.email,
-    password: hashedPassword,
+    password: request.password,
   });
 
   appAssert(registerUser, StatusCodes.BAD_REQUEST, "User can not be created");
@@ -41,19 +37,17 @@ export const registerHandler = catchErrors(async (req, res) => {
 
 export const loginHandler = catchErrors(async (req, res) => {
   // validate inputs
-  const request = loginSchema.parse({
-    ...req.body,
-  });
+  const request = loginSchema.parse(req.body);
 
   // check if the user exists or not
   const user = await UserModel.findOne({
     email: request.email,
   });
 
-  appAssert(user, StatusCodes.UNAUTHORIZED, "Invalid loginId entered");
+  appAssert(user, StatusCodes.UNAUTHORIZED, "Invalid email entered");
 
-  // compare the password
-  const isValidPassword = await compareValue(request.password, user.password);
+  // validate password from the request
+  const isValidPassword = await user.comparePassword(request.password);
 
   appAssert(isValidPassword, StatusCodes.UNAUTHORIZED, "Wrong password entered");
 
@@ -78,8 +72,6 @@ export const loginHandler = catchErrors(async (req, res) => {
 });
 
 export const logoutHandler = catchErrors(async (req, res) => {
-  const accessToken = req.cookies.accessToken as string | undefined;
-
   // return the response with cleared cookies
   return clearAuthCookies(res).status(StatusCodes.OK).json({
     message: "Logout successful",

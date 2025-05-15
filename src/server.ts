@@ -10,7 +10,8 @@ import { FRONTEND_URL, NODE_ENV, PORT } from "@/constants/env";
 
 // Routes
 import authRouter from "@/routes/auth.routes";
-import vehicleRouter from "./routes/vehicle.routes";
+import vehicleRouter from "@/routes/vehicle.routes";
+import contactRouter from "@/routes/contact.routes";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/vehicle", vehicleRouter)
+app.use("/api/contact", contactRouter)
 
 // This must be the last route
 app.use((req: any, res: any) => {
