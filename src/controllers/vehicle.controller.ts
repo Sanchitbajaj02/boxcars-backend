@@ -20,13 +20,14 @@ export const getAllVehiclesHandler = catchErrors(async (req, res) => {
 export const getSingleVehicleHandler = catchErrors(async (req, res) => {
   const vehicleId = req.params.vehicleId;
 
-  const request = vehicleIdSchema.parse(vehicleId);
+  const parsedVehicleId = vehicleIdSchema.parse(vehicleId);
 
-  console.log("request:", request);
+  const vehicleData = await VehicleModel.findById(parsedVehicleId)
 
   // const vehicle = await VehicleModel.findById()
   return res.status(StatusCodes.OK).json({
     message: "Get single vehicle",
+    data: vehicleData
   });
 });
 
