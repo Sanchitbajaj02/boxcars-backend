@@ -2,7 +2,6 @@ import { StatusCodes } from "http-status-codes";
 import { registerSchema, loginSchema } from "@/zodSchemas/auth.schemas";
 import catchErrors from "@/utils/catchErrors";
 import appAssert from "@/utils/appAssert";
-import createPasswordGenerator from "@/utils/createPassword";
 
 import { hashValue, compareValue } from "@/utils/bcrypt";
 import { refreshTokenSignOptions, signToken, accessTokenSignOptions, verifyToken } from "@/utils/jwt";
@@ -75,6 +74,15 @@ export const loginHandler = catchErrors(async (req, res) => {
 
   return setAuthCookies({ res, accessToken, refreshToken }).status(StatusCodes.OK).json({
     message: "Login successful",
+  });
+});
+
+export const logoutHandler = catchErrors(async (req, res) => {
+  const accessToken = req.cookies.accessToken as string | undefined;
+
+  // return the response with cleared cookies
+  return clearAuthCookies(res).status(StatusCodes.OK).json({
+    message: "Logout successful",
   });
 });
 
