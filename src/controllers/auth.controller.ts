@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import { registerSchema, loginSchema } from "@/zodSchemas/auth.schemas";
+import { registerSchema, loginSchema } from "@/zodSchemas/auth.schema";
 import catchErrors from "@/utils/catchErrors";
 import appAssert from "@/utils/appAssert";
 

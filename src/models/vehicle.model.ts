@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export interface VehicleDocument extends mongoose.Document {
   vehicleMake: string;
-  vehicleModel: string; // Renamed to avoid conflict with mongoose.Document
+  vehicleModel: string;
   vehicleYear: number;
   vehiclePrice: number;
   vehicleMileage: number;
@@ -43,12 +43,12 @@ const vehicleSchema = new mongoose.Schema<VehicleDocument>(
     vehicleFuelType: {
       type: String,
       required: true,
-      enum: ["petrol", "diesel", "electric", "hybrid"],
+      enum: ["PETROL", "DIESEL", "ELECTRIC", "HYBRID"],
     },
     vehicleTransmission: {
       type: String,
       required: true,
-      enum: ["manual", "automatic"],
+      enum: ["MANUAL", "AUTOMATIC"],
     },
     vehicleImages: {
       type: [String],

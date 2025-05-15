@@ -1,14 +1,16 @@
 import jwt, { SignOptions, VerifyOptions } from "jsonwebtoken";
-import { JWT_REFRESH_SECRET, JWT_SECRET } from "../constants/env";
+import { JWT_REFRESH_SECRET, JWT_SECRET } from "@/constants/env";
+import { UserDocument } from "@/models/user.model";
+import mongoose from "mongoose";
 
 // refresh token payload = 30 days
 export type RefreshTokenPayload = {
-  userId: string;
+  userId: UserDocument["_id"] | mongoose.Types.ObjectId;
 };
 
 // access token payload = 1 day
 export type AccessTokenPayload = {
-  userId: string;
+  userId: UserDocument["_id"] | mongoose.Types.ObjectId;
 };
 
 export type SignOptionsAndSecret = SignOptions & { secret: string };
