@@ -1,9 +1,7 @@
 import { Router } from "express";
 const contactRouter = Router();
 
-import {
-  saveContactForm
-} from "@/controllers/contact.controller";
+import { saveContactForm } from "@/controllers/contact.controller";
 
 contactRouter.post("/", saveContactForm);
 

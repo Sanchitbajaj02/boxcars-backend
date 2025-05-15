@@ -3,7 +3,7 @@ import { fifteenMinutesFromNow, thirtyDaysFromNow } from "./date";
 import { NODE_ENV } from "../constants/env";
 
 const secure = NODE_ENV !== "development";
-export const REFRESH_PATH = "/auth/refresh"
+export const REFRESH_PATH = "/auth/refresh";
 
 const defaults: CookieOptions = {
   sameSite: "strict",
@@ -40,6 +40,6 @@ export const setAuthCookies = ({ res, accessToken, refreshToken }: SetAuthCookie
 
 export const clearAuthCookies = (res: Response) => {
   return res.clearCookie("accessToken").clearCookie("refreshToken", {
-    path: REFRESH_PATH
-  })
-}
+    path: REFRESH_PATH,
+  });
+};

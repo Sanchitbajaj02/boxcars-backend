@@ -18,7 +18,7 @@ const vehicleSchema = new mongoose.Schema<VehicleDocument>(
     vehicleMake: {
       type: String,
       required: true,
-      index: true, 
+      index: true,
     },
     vehicleModel: {
       type: String,

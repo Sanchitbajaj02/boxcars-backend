@@ -1,6 +1,8 @@
 import { Router } from "express";
 const vehicleRouter = Router();
 
+import authenticate from "@/middlewares/authenticate";
+
 import {
   getAllVehiclesHandler,
   getSingleVehicleHandler,
@@ -12,10 +14,10 @@ vehicleRouter.get("/", getAllVehiclesHandler);
 
 vehicleRouter.get("/:vehicleId", getSingleVehicleHandler);
 
-vehicleRouter.post("/", saveVehicleHandler);
+vehicleRouter.post("/", authenticate, saveVehicleHandler);
 
 // vehicleRouter.put("/vehicle");
 
-vehicleRouter.delete("/:vehicleId", deleteVehicleHandler);
+vehicleRouter.delete("/:vehicleId", authenticate, deleteVehicleHandler);
 
 export default vehicleRouter;

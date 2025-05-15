@@ -3,17 +3,13 @@ import appAssert from "@/utils/appAssert";
 import { StatusCodes } from "http-status-codes";
 import AppErrorCode from "@/constants/appErrorCode";
 import { verifyToken } from "@/utils/jwt";
+import mongoose from "mongoose";
 
 const authenticate: RequestHandler = (req, res, next) => {
   // get access token from cookies
   const accessToken = req.cookies.accessToken as string | undefined;
 
-  appAssert(
-    accessToken,
-    StatusCodes.UNAUTHORIZED,
-    "Not Authorized",
-    AppErrorCode.InvalidAccessToken
-  );
+  appAssert(accessToken, StatusCodes.UNAUTHORIZED, "Not Authorized", AppErrorCode.InvalidAccessToken);
 
   // verify a ccess token
   const { error, payload } = verifyToken(accessToken);
@@ -25,8 +21,8 @@ const authenticate: RequestHandler = (req, res, next) => {
     AppErrorCode.InvalidAccessToken
   );
 
-  req.userId = payload?.userId;
-  
+  req.userId = payload?.userId as mongoose.Types.ObjectId;
+
   next();
 };
 
