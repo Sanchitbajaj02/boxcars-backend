@@ -12,7 +12,7 @@ export const getAllVehiclesHandler = catchErrors(async (req, res) => {
 
   // send final response
   return res.status(StatusCodes.OK).json({
-    message: "Get all vehicles",
+    message: "Get all vehicles information",
     data: vehicles,
   });
 });
@@ -29,7 +29,7 @@ export const getSingleVehicleHandler = catchErrors(async (req, res) => {
 
   // send final response
   return res.status(StatusCodes.OK).json({
-    message: "Get single vehicle",
+    message: "Get single vehicle information",
     data: vehicleData,
   });
 });
@@ -53,7 +53,7 @@ export const saveVehicleHandler = catchErrors(async (req, res) => {
 
   // send final response
   return res.status(StatusCodes.CREATED).json({
-    message: "Vehicle created successfully",
+    message: "Vehicle information created successfully",
   });
 });
 
@@ -77,6 +77,50 @@ export const deleteVehicleHandler = catchErrors(async (req, res) => {
 
   // send final response
   return res.status(StatusCodes.OK).json({
-    message: "Vehicle deleted successfully",
+    message: "Vehicle information deleted successfully",
+  });
+});
+
+export const updateVehicleHandler = catchErrors(async (req, res) => {
+  // save vehicleId in a variable
+  const vehicleId = req.params.vehicleId;
+
+  // validate inputs
+  const parsedVehicleId = vehicleIdSchema.parse(vehicleId);
+
+  const request = vehicleSchema.parse(req.body);
+
+  // find whether this id exists or not
+  const vehicleExist = await VehicleModel.exists({
+    _id: parsedVehicleId,
+  });
+
+  appAssert(vehicleExist, StatusCodes.FORBIDDEN, "Vehicle does not exist in the system");
+
+  // update vehicle information
+  const updatedVehicle = await VehicleModel.findOneAndUpdate(
+    {
+      _id: vehicleId,
+    },
+    {
+      vehicleMake: request.vehicleMake,
+      vehicleModel: request.vehicleModel,
+      vehicleYear: request.vehicleYear,
+      vehiclePrice: request.vehiclePrice,
+      vehicleMileage: request.vehicleMileage,
+      vehicleFuelType: request.vehicleFuelType,
+      vehicleTransmission: request.vehicleTransmission,
+    },
+    {
+      new: true,
+    }
+  );
+
+  appAssert(updatedVehicle, StatusCodes.BAD_REQUEST, "Error in updating vehicle information");
+
+  // send final response
+  return res.status(StatusCodes.OK).json({
+    message: "Vehicle information updated successfully",
+    data: updatedVehicle,
   });
 });

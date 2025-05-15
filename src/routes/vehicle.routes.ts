@@ -8,6 +8,7 @@ import {
   getSingleVehicleHandler,
   saveVehicleHandler,
   deleteVehicleHandler,
+  updateVehicleHandler,
 } from "@/controllers/vehicle.controller";
 
 vehicleRouter.get("/", getAllVehiclesHandler);
@@ -16,8 +17,8 @@ vehicleRouter.get("/:vehicleId", getSingleVehicleHandler);
 
 vehicleRouter.post("/", authenticate, saveVehicleHandler);
 
-// vehicleRouter.put("/vehicle");
-
 vehicleRouter.delete("/:vehicleId", authenticate, deleteVehicleHandler);
+
+vehicleRouter.put("/:vehicleId", authenticate, updateVehicleHandler);
 
 export default vehicleRouter;
