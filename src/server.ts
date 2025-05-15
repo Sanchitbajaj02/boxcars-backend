@@ -10,6 +10,7 @@ import { FRONTEND_URL, NODE_ENV, PORT } from "@/constants/env";
 
 // Routes
 import authRouter from "@/routes/auth.routes";
+import vehicleRouter from "./routes/vehicle.routes";
 
 const app = express();
 
@@ -25,13 +26,12 @@ app.use(
 app.use(morgan("dev"));
 app.use(cookieParser());
 
-app.use("/api/v1/auth", authRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/vehicle", vehicleRouter)
 
-app.use("*", (req, res, next) => {
-  console.log("Hello, World!");
-  res.status(301).json({
-    message: "Hello, World!",
-  });
+// This must be the last route
+app.use((req: any, res: any) => {
+  res.status(404).send("Route not found. This is the fallback handler.");
 });
 
 app.use(errorHandler);

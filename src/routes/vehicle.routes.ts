@@ -3,11 +3,11 @@ const vehicleRouter = Router();
 
 import { getAllVehiclesHandler, getSingleVehicleHandler } from "@/controllers/vehicle.controller";
 
-vehicleRouter.get("/vehicles", getAllVehiclesHandler);
+vehicleRouter.get("/", getAllVehiclesHandler);
 
-vehicleRouter.get("/vehicle/:vehicleId", getSingleVehicleHandler);
+vehicleRouter.get("/:vehicleId", getSingleVehicleHandler);
 
-// vehicleRouter.post("/vehicle");
+vehicleRouter.post("/vehicle");
 
 // vehicleRouter.put("/vehicle");
 
