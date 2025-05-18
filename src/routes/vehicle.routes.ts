@@ -15,7 +15,7 @@ vehicleRouter.get("/", getAllVehiclesHandler);
 
 vehicleRouter.get("/:vehicleId", getSingleVehicleHandler);
 
-vehicleRouter.post("/", authenticate, saveVehicleHandler);
+vehicleRouter.post("/", saveVehicleHandler);
 
 vehicleRouter.delete("/:vehicleId", authenticate, deleteVehicleHandler);
 
