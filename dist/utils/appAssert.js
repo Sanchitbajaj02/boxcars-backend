@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_assert_1 = __importDefault(require("node:assert"));
-const AppError_1 = __importDefault(require("@/utils/AppError"));
+const AppError_1 = __importDefault(require("../utils/AppError"));
 /**
  * Asserts a condition and throws an AppError if the condition is falsy
  */

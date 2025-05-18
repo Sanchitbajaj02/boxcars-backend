@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = exports.signToken = exports.refreshTokenSignOptions = exports.accessTokenSignOptions = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const env_1 = require("@/constants/env");
+const env_1 = require("../constants/env");
 const defaults = {
     audience: ["user"],
 };

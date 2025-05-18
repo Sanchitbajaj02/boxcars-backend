@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.saveContactForm = void 0;
 const http_status_codes_1 = require("http-status-codes");
-const catchErrors_1 = __importDefault(require("@/utils/catchErrors"));
-const appAssert_1 = __importDefault(require("@/utils/appAssert"));
-const contact_model_1 = __importDefault(require("@/models/contact.model"));
-const contact_schema_1 = require("@/zodSchemas/contact.schema");
+const catchErrors_1 = __importDefault(require("../utils/catchErrors"));
+const appAssert_1 = __importDefault(require("../utils/appAssert"));
+const contact_model_1 = __importDefault(require("../models/contact.model"));
+const contact_schema_1 = require("../zodSchemas/contact.schema");
 exports.saveContactForm = (0, catchErrors_1.default)(async (req, res) => {
     // validate inputs
     const parsedForm = contact_schema_1.contactSchema.parse(req.body);

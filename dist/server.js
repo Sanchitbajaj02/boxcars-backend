@@ -6,16 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("tsconfig-paths/register"); // Enables path aliases
 require("dotenv/config");
 const express_1 = __importDefault(require("express"));
-const db_1 = require("@/configs/db");
+const db_1 = require("./configs/db");
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
-const errorHandler_1 = __importDefault(require("@/middlewares/errorHandler"));
-const env_1 = require("@/constants/env");
+const errorHandler_1 = __importDefault(require("./middlewares/errorHandler"));
+const env_1 = require("./constants/env");
 // Routes
-const auth_routes_1 = __importDefault(require("@/routes/auth.routes"));
-const vehicle_routes_1 = __importDefault(require("@/routes/vehicle.routes"));
-const contact_routes_1 = __importDefault(require("@/routes/contact.routes"));
+const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
+const vehicle_routes_1 = __importDefault(require("./routes/vehicle.routes"));
+const contact_routes_1 = __importDefault(require("./routes/contact.routes"));
 const app = (0, express_1.default)();
 app.set("trust proxy", true);
 app.use(express_1.default.json());

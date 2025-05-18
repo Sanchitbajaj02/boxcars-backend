@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const bcrypt_1 = require("@/utils/bcrypt");
+const bcrypt_1 = require("../utils/bcrypt");
 const userSchema = new mongoose_1.default.Schema({
     fullName: {
         type: String,

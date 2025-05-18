@@ -3,9 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const appAssert_1 = __importDefault(require("@/utils/appAssert"));
+const appAssert_1 = __importDefault(require("../utils/appAssert"));
 const http_status_codes_1 = require("http-status-codes");
-const jwt_1 = require("@/utils/jwt");
+const jwt_1 = require("../utils/jwt");
 const authenticate = (req, res, next) => {
     // get access token from cookies
     const accessToken = req.cookies.accessToken;

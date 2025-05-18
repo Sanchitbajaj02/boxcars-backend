@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateVehicleHandler = exports.deleteVehicleHandler = exports.saveVehicleHandler = exports.getSingleVehicleHandler = exports.getAllVehiclesHandler = void 0;
 const http_status_codes_1 = require("http-status-codes");
-const catchErrors_1 = __importDefault(require("@/utils/catchErrors"));
-const appAssert_1 = __importDefault(require("@/utils/appAssert"));
-const vehicle_model_1 = __importDefault(require("@/models/vehicle.model"));
-const vehicle_schema_1 = require("@/zodSchemas/vehicle.schema");
+const catchErrors_1 = __importDefault(require("../utils/catchErrors"));
+const appAssert_1 = __importDefault(require("../utils/appAssert"));
+const vehicle_model_1 = __importDefault(require("../models/vehicle.model"));
+const vehicle_schema_1 = require("../zodSchemas/vehicle.schema");
 exports.getAllVehiclesHandler = (0, catchErrors_1.default)(async (req, res) => {
     // fetch all vehicles
     const vehicles = await vehicle_model_1.default.find();

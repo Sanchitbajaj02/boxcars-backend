@@ -5,13 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logoutHandler = exports.loginHandler = exports.registerHandler = void 0;
 const http_status_codes_1 = require("http-status-codes");
-const auth_schema_1 = require("@/zodSchemas/auth.schema");
-const catchErrors_1 = __importDefault(require("@/utils/catchErrors"));
-const appAssert_1 = __importDefault(require("@/utils/appAssert"));
-const jwt_1 = require("@/utils/jwt");
-const cookies_1 = require("@/utils/cookies");
+const auth_schema_1 = require("../zodSchemas/auth.schema");
+const catchErrors_1 = __importDefault(require("../utils/catchErrors"));
+const appAssert_1 = __importDefault(require("../utils/appAssert"));
+const jwt_1 = require("../utils/jwt");
+const cookies_1 = require("../utils/cookies");
 // models
-const user_model_1 = __importDefault(require("@/models/user.model"));
+const user_model_1 = __importDefault(require("../models/user.model"));
 exports.registerHandler = (0, catchErrors_1.default)(async (req, res) => {
     // validate inputs
     const request = auth_schema_1.registerSchema.parse(req.body);
