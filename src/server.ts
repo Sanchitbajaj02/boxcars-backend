@@ -1,3 +1,5 @@
+import "tsconfig-paths/register"; // Enables path aliases
+
 import "dotenv/config";
 import express from "express";
 import { connectToDatabase } from "@/configs/db";
