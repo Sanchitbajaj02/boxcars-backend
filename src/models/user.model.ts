@@ -43,7 +43,7 @@ userSchema.pre("save", async function (next) {
     return next();
   }
 
-  // this.password = await hashValue(this.password);
+  this.password = await hashValue(this.password);
   next();
 });
 
